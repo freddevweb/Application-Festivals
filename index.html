@@ -5,8 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Festivals</title>
+    <link rel="stylesheet" href="assets/js/jquery-ui-1.12.1.custom/jquery-ui.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+
 </head>
 <body>
+    <header>
+        <h1>Festivals de musique en France</h1>
+    </header>
     
+    <div id="main">
+
+        <section id="map"></section>
+
+        <section id="forms">
+
+            <div id="menu">
+                <button id="chercherBtn" title="Chercher un festival">Chercher</button>
+                <button id="ajouterBtn"title="Ajouter un festival">Ajouter</button>
+            </div>
+
+            <div id="content">
+
+                <!-- II gestion utilisateur -->
+    <!--  
+                <div id="chercherGroup">
+                    <h2>Chercher un festival</h2>
+                    <form id="chercherFestival">
+                        <select name="" id="">
+                            <option value=""></option>
+                        </select>
+                        <input type="text" id="dateDebut" name="dateDebut" placeholder="Date de début" />
+                        <input type="text" id="dateFin" name="dateFin" placeholder="Date de fin" />
+
+                        <input type="button" name="" value="Localiser sur la carte">
+
+                    </form>
+                </div>
+    -->
+
+                <!-- gestion globale -->
+                <div id="ajouterGroup">
+                    <h2>Ajouter un festival</h2>
+                    <div>
+
+                        <form id="formAjouter">
+                            <div class="form-group">
+                                <input type="text" id="nom" name="nom" placeholder="Nom du festival" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="dateDebut" name="dateDebut" placeholder="Date de début" />
+                                <input type="text" id="dateFin" name="dateFin" placeholder="Date de fin" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="urlLogo" name="urlLogo" placeholder="Lien du logo du festival" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="position" placeholder="Géolocalisation du festival" disabled/>
+                            </div>
+                            <div class="form-group checkboxes">
+                                <span class="checkbox-line">
+                                    <input type="checkbox" id="variete" value="variete">
+                                    <label for="variete">VARIETE</label>
+                                </span>
+                                <span class="checkbox-line">
+                                    <input type="checkbox" id="pop" value="pop">
+                                    <label for="pop">POP</label>
+                                </span>
+                                <span class="checkbox-line">
+                                <input type="checkbox" id="rock" value="rock">
+                                <label for="rock">ROCK</label>
+                                </span>
+                                <span class="checkbox-line">
+                                <input type="checkbox" id="punk" value="punk">
+                                <label for="punk">PUNK</label>
+                                </span>
+                                <span class="checkbox-line">
+                                <input type="checkbox" id="electro" value="pop">
+                                <label for="electro">ELECTRO</label>
+                                </span>
+                                <span class="checkbox-line">
+                                <input type="checkbox" id="house" value="house">
+                                <label for="house">HOUSE</label>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="variete" value="variete">
+                            </div>
+                            
+                            
+                            <input type="submit" value="Ajouter" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    </div>
+
+
+
+
+
+
+
+    <script src="assets/js/App.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFeyRYHmKQngMTP4FJX1Ve-6zUpOtAniU&callback=app.initMap"
+    async defer></script>
 </body>
 </html>

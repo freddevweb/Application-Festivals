@@ -1,0 +1,66 @@
+html, body {
+    height: 100%;
+}
+body {
+    background-color: #414242;
+    width: 100%;
+}
+
+header{
+    width: 100%;
+    text-align: center;
+    color: #91FAFF;
+}
+
+#main {
+    display: flex;
+    height: 100%;
+    padding: 10px 10px 10px 10px;
+}
+
+#map {
+    width: 70%;
+    padding: 10px 10px 10px 10px;
+    /* margin: 10px 10px; */
+}
+
+#forms {
+    width: 30%;
+    padding: 20px 20px 20px 10px;
+    /* margin: 10px 10px; */
+    background-image: url("../img/bg.jpg");
+    background-size: cover;
+}
+
+h2 {
+    text-align: center;
+    font-weight: bold;
+    color: lightblue;
+}
+
+.checkbox-line{
+    display: block;
+   
+}
+
+input[type=text] {
+    width : 100%;
+    height: 33px;
+    font-size: 1.5em;
+    color: white;
+    background-color: black;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+/* 
+.checkboxes {
+    display: flex;
+}
+
+
+
+.checkbox-line input{
+
+}
+
+ */
