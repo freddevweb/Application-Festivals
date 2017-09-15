@@ -17,6 +17,7 @@ class App {
         this.$electro = $( "#electro" );
         this.$house = $( "#house" );
         this.$checkboxes = $( ":checkbox" );
+        this.$divError = $( "#error" );
         // form filter
 
         // ######### standard variables
@@ -89,22 +90,87 @@ class App {
     };
 
     addFestival( position, titre, type, logo, debut, fin ){
-
+        
         var festival = new google.maps.Marker({
             position: position,
             map: this.map,
-            title: title
+            title: titre,
+            icon : logo
         });
 
-        marker.type = type;
-        marker.logo = logo;
-        marker.debut = debut;
-        marker.fin = fin;
+        
+        festival.type = type;
+        festival.debut = debut;
+        festival.fin = fin;
 
         this.festivals.push( festival );
 
-        return marker;
+        return festival;
     };
+
+    showError(){
+        var pError = "";
+        for( var error of this.errors ){
+            pError += "<p>" + error + "</p>";
+        }
+
+        this.$divError.append( pError );
+        var that = this;
+        this.$divError.fadeIn( 300, function(){
+            setTimeout(function() {
+                console.log( this );
+                that.$divError.fadeOut( 300 );
+                that.$divError.html("");
+                that.errors = [];
+            }, 4000 );
+        })
+
+
+    }
+
+    // demander a pierre
+    saveFestivals(){
+        var arrayFestivals = [];
+
+        for( var festival of this.festivals ){
+            var objectFestivals = {
+                position : festival.position,
+                titre : festival.titre,
+                type : festival.type,
+                logo : festival.logo,
+                debut : festival.debut,
+                fin : festival.fin
+            };
+            arrayFestivals.push(objectFestivals);
+        }
+        var festivalsString = JSON.stringify(arrayFestivals);
+        localStorage.setItem("festivals", festivalsString );
+        
+    }
+
+
+    // readFestivals(){
+
+    //     var festivalsString = localStorage.getItem( "festivals" );
+        
+    //     if( !festivalsString ){
+    //         return;
+    //     }
+
+    //     var arrayFestivals = JSON.parse( festivalsString ); // reviens a la structure de tableau et pas d'objet
+
+    //     for( var festivalObjet of arrayFestivals ){
+            
+    //         this.addFestival(
+    //             festivalObjet.position,
+    //             festivalObjet.titre,
+    //             festivalObjet.type,
+    //             festivalObjet.logo,
+    //             festivalObjet.debut,
+    //             festivalObjet.fin
+    //         );
+    //     }
+    // }
 
 
 

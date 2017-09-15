@@ -11,6 +11,7 @@ app.$dateDebut.change(function(){ // ne fonctionne pas !
 });
 
 
+
 // ########################### maps
 
 app.main = function(){
@@ -28,32 +29,50 @@ app.main = function(){
         event.preventDefault();
         
         if( !app.$nom.val() ){
-            app.errors = "Veuillez saisir le nom du festival";
+            app.errors.push("Veuillez saisir le nom du festival");
         }
-        if( app.regexDate.test( app.$dateDebut.val() ) ){
-            app.errors = "Veuillez ressaisir la date du début dans le bon format (ex:01/12/2017)";
+        if( !app.regexDate.test( app.$dateDebut.val() ) ){
+            app.errors.push("Veuillez ressaisir la date du début dans le bon format (ex:01-12-2017)");
         }
         if( !app.$dateDebut.val() ){
-            app.errors = "Veuillez saisir une date du début";
+            app.errors.push("Veuillez saisir une date du début");
         }
-        if( app.regexDate.test( app.$dateFin.val() ) ){
-            app.errors = "Veuillez ressaisir la date du début dans le bon format (ex:01/12/2017)";
-        }
-        if( !app.$dateFin.val() ){
-            app.errors = "Veuillez saisir une date du début";
+        if( !app.regexDate.test( app.$dateFin.val() ) ){
+            app.errors.push("Veuillez ressaisir la date du début dans le bon format (ex:01-12-2017)");
         }
         if( !app.$dateFin.val() ){
-            app.errors = "Veuillez saisir une date du début";
+            app.errors.push("Veuillez saisir une date du début");
+        }
+        if( !app.$dateFin.val() ){
+            app.errors.push("Veuillez saisir une date du début");
         }
         if( !app.$checkboxes.is(":checked") ){
-            app.errors = "Veuillez renseigner au moins un type de musique";
+            app.errors.push("Veuillez renseigner au moins un type de musique");
         }
         
-        if( !app.errors ){
+        if( app.errors == "" ){
 
+            var type = [];
+            app.$checkboxes.each(function(element) {
+                if( $( this ).is(":checked") ){
+                    type.push( $( this ).attr("id") );
+                }
+            });
+
+            var image = {
+                url: app.$urlLogo.val()
+            };
+
+            app.addFestival( 
+                app.positionTemp, app.$nom.val(), 
+                type, 
+                image, 
+                app.$dateDebut.datepicker('getDate'), 
+                app.$dateFin.datepicker('getDate')
+            );
         }
         else {
-            
+            app.showError();
         }
         
     });
@@ -82,9 +101,19 @@ app.main = function(){
 
 
 
-
+    // window.onbeforeunload = function(){
+    //     app.saveFestivals();
+    // }
 
 
 
 
 }
+
+// ###################################  A LA FERMETURE
+
+window.onbeforeunload = function(){
+    app.saveFestivals();
+}
+
+

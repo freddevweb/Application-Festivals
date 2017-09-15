@@ -48,9 +48,20 @@ input[type=text] {
     height: 33px;
     font-size: 1.5em;
     color: white;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.5);
     border: 1px solid grey;
     border-radius: 5px;
+}
+
+
+#error {
+    padding: 0px 20px 0px 20px;
+    border: 3px solid black;
+    border-radius: 10px;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    color: lightcoral;
 }
 /* 
 .checkboxes {
