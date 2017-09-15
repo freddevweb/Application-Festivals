@@ -15,7 +15,7 @@ app.$dateDebut.change(function(){ // ne fonctionne pas !
 // ########################### maps
 
 app.main = function(){
-
+    app.readFestivals();
     // click sur map ajoute la position a la position temporaire
     google.maps.event.addListener(app.map, 'click', function(event) {
 
