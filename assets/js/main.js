@@ -1,5 +1,25 @@
 var app = new App();
+localStorage.clear("festivals");
 
+// ########################### menu
+app.$chercher.click(function(){
+
+    if( app.$ajouterGroup.css("display") == "block" ){
+
+        app.$ajouterGroup.css("display", "none");
+    }
+
+    app.$chercherGroup.css("display", "block");
+});
+
+app.$ajouter.click(function(){
+    if( app.$chercherGroup.css("display") == "block" ){
+
+        app.$chercherGroup.css("display", "none");
+    }
+
+    app.$ajouterGroup.css("display", "block");
+});
 // ########################### datepicker
 
 app.$dateDebut.change(function(){ // ne fonctionne pas !
@@ -10,12 +30,14 @@ app.$dateDebut.change(function(){ // ne fonctionne pas !
     
 });
 
-
-
 // ########################### maps
 
 app.main = function(){
+
     app.readFestivals();
+
+    // ########################### form ajouter festival
+
     // click sur map ajoute la position a la position temporaire
     google.maps.event.addListener(app.map, 'click', function(event) {
 
@@ -64,9 +86,10 @@ app.main = function(){
             };
 
             app.addFestival( 
-                app.positionTemp, app.$nom.val(), 
+                app.positionTemp, 
+                app.$nom.val(), 
                 type, 
-                image, 
+                app.$urlLogo.val(), 
                 app.$dateDebut.datepicker('getDate'), 
                 app.$dateFin.datepicker('getDate')
             );
@@ -79,6 +102,8 @@ app.main = function(){
 
 
 
+    // ########################### form chercher festival
+    
 
 
 

@@ -3,23 +3,31 @@ class App {
     constructor(){
         //  ######### dom variables
         this.$map = $("#map")[0];
-
+        // button menu
+        this.$chercher = $( "#chercherBtn" );
+        this.$ajouter = $( "#ajouterBtn" );
+        this.$chercherGroup = $( "#chercherGroup" );
+        this.$ajouterGroup = $( "#ajouterGroup" );
+        // form add
         this.$addForm = $( "#formAjouter" );
         this.$nom = $( "#nom" );
         this.$dateDebut = $( "#dateDebut" );
         this.$dateFin = $( "#dateFin" );
-        this.$position = $( "#position");        
+        this.$position = $( "#position");
         this.$urlLogo = $( "#urlLogo" );
+        this.$checkboxes = $( "#ajouterGroup :checkbox" );
+        
+        // form filter
+        this.$nomSearch = $( "#nomSearch" );
+        this.$dateDebutSearch = $( "#dateDebutSearch" );
+        this.$dateFinSearch = $( "#dateFinSearch" );
         this.$variete = $( "#variete" );
         this.$pop = $( "#pop" );
         this.$rock = $( "#rock" );
         this.$punk = $( "#punk" );
         this.$electro = $( "#electro" );
         this.$house = $( "#house" );
-        this.$checkboxes = $( ":checkbox" );
-        this.$divError = $( "#error" );
-        // form filter
-
+        this.$divError = $( ".error" );
         // ######### standard variables
         // datepicker
         this.dateMin = new Date( Date.now() );
@@ -50,6 +58,7 @@ class App {
 
     // ########################### datepicker
     initDatepicker( startDate ){
+        console.log("datepicker");
         var options = {
             dayNames: [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ],
             dayNamesMin: [ "Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa" ],
@@ -73,6 +82,8 @@ class App {
 
         this.$dateDebut.datepicker( options );
         this.$dateFin.datepicker( options );
+        this.$dateDebutSearch.datepicker( options );
+        this.$dateFinSearch.datepicker( options );
     }
 
 
@@ -90,39 +101,53 @@ class App {
     };
 
     addFestival( position, titre, type, logo, debut, fin ){
-
+        
+        var image = {
+            url : logo,
+            scaledSize: new google.maps.Size(100, 20)
+        }
         var festival = new google.maps.Marker({
             position: position,
             map: this.map,
             title: titre,
-            icon : logo
+            icon : image
         });
 
         festival.type = type;
         festival.debut = debut;
         festival.fin = fin;
 
-        this.addInfoWindow(titre, type, debut, fin);
-
+        var infowindow = this.addInfoWindow( festival, titre, type, debut, fin);
+        
         this.festivals.push( festival );
+        var that = this;
+        festival.addListener('click', function() {
+            infowindow.open(that.map, festival);
+        });
 
         return festival;
     };
 
-    addInfoWindow( titre, type, debut, fin ){
+    addInfoWindow( marker, titre, type, debut, fin ){
+        var newDebut = new Date(debut);
+        var dateDebut = newDebut.getDate() + "/" + newDebut.getMonth() + "/" + newDebut.getFullYear();
+        var newFin = new Date(fin);
+        var dateFin = newFin.getDate() + "/" + newFin.getMonth() + "/" + newFin.getFullYear();
+        
         var contentInfo = "<div id=" + titre.replace(/\s/g,'') + ">";
         contentInfo += '<h1 id="firstHeading" class="firstHeading">' + titre + '</h1>';
         contentInfo += '<div id="bodyContent">';
-        contentInfo += '<p>Du : ' + debut + ', au : ' + fin + '</p>';
+        contentInfo += '<p>Du : ' + dateDebut + ', au : ' + dateFin + '</p>';
         contentInfo += '<ul>Styles de musiques du festival :'
         for( var a of type){
-            contentInfo += '<li>' + type + '</li>';
+            contentInfo += '<li>' + a + '</li>';
         }
         contentInfo += '</ul></div></div>';
 
         var infowindow = new google.maps.InfoWindow({
             content: contentInfo
           });
+        return infowindow;
     }
 
     showError(){
@@ -135,7 +160,6 @@ class App {
         var that = this;
         this.$divError.fadeIn( 300, function(){
             setTimeout(function() {
-                console.log( this );
                 that.$divError.fadeOut( 300 );
                 that.$divError.html("");
                 that.errors = [];
@@ -148,6 +172,8 @@ class App {
     // demander a pierre
     saveFestivals(){
         
+    
+
         var arrayFestivals = [];
 
         for( var festival of this.festivals ){
@@ -155,10 +181,11 @@ class App {
                 position : festival.position,
                 titre : festival.title,
                 type : festival.type,
-                logo : festival.icon,
+                logo : festival.icon.url,
                 debut : festival.debut,
                 fin : festival.fin
             };
+            console.log(arrayFestivals);
             arrayFestivals.push(objectFestivals);
         }
         var festivalsString = JSON.stringify(arrayFestivals);
@@ -168,17 +195,20 @@ class App {
 
 
     readFestivals(){
+
         var festivalsString = localStorage.getItem( "festivals" );
         
         if( !festivalsString ){
-            return;
+            var arrayFestivals = contentsFestivals;
         }
-
-        var arrayFestivals = JSON.parse( festivalsString ); // reviens a la structure de tableau et pas d'objet
+        else {
+            var arrayFestivals = JSON.parse( festivalsString ); 
+        }
 
         for( var festivalObjet of arrayFestivals ){
             
             this.addFestival(
+
                 festivalObjet.position,
                 festivalObjet.titre,
                 festivalObjet.type,
@@ -186,10 +216,17 @@ class App {
                 festivalObjet.debut,
                 festivalObjet.fin
             );
+
+            this.addOptions( festivalObjet.titre );
         }
+
     }
 
+    addOptions( titre ){
+        var option = "<option value=" + titre.replace(/\s/g,'') + ">" + titre + "</option>";
+        this.$nomSearch.append(option);
 
+    }
 
 
 

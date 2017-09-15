@@ -32,42 +32,19 @@
                 <!-- II gestion utilisateur -->
     
                 <div id="chercherGroup">
-                    <!--  
                     <h2>Chercher un festival</h2>
                     <form id="chercherFestival">
-                        <select name="" id="">
-                            <option value=""></option>
-                        </select>
-                        <input type="text" id="dateDebut" name="dateDebut" placeholder="Date de début" />
-                        <input type="text" id="dateFin" name="dateFin" placeholder="Date de fin" />
-
-                        <input type="button" name="" value="Localiser sur la carte">
-
-                    </form>
-                        -->
-                </div>
-
-
-                <!-- gestion globale -->
-                <div id="ajouterGroup">
-                    <h2>Ajouter un festival</h2>
-                    <div>
-
-                        <form id="formAjouter">
-                            <div class="form-group">
-                                <input type="text" id="nom" name="nom" placeholder="Nom du festival" />
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="dateDebut" name="dateDebut" placeholder="Date de début" />
-                                <input type="text" id="dateFin" name="dateFin" placeholder="Date de fin" />
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="urlLogo" name="urlLogo" placeholder="Lien du logo du festival" />
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="position" placeholder="Géolocalisation du festival" disabled/>
-                            </div>
-                            <div class="form-group checkboxes">
+                        <div class="form-group">
+                            <select id="nomSearch">
+                                <option>Choisissez un festival</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="dateDebutSearch" placeholder="Date de début" />
+                            <input type="text" id="dateFinSearch" placeholder="Date de fin" />
+                        </div>
+                        <div class="form-group checkboxes">
+                            <div class="group">
                                 <span class="checkbox-line">
                                     <input type="checkbox" id="variete" value="variete">
                                     <label for="variete">VARIETE</label>
@@ -77,28 +54,82 @@
                                     <label for="pop">POP</label>
                                 </span>
                                 <span class="checkbox-line">
-                                <input type="checkbox" id="rock" value="rock">
-                                <label for="rock">ROCK</label>
-                                </span>
-                                <span class="checkbox-line">
-                                <input type="checkbox" id="punk" value="punk">
-                                <label for="punk">PUNK</label>
-                                </span>
-                                <span class="checkbox-line">
-                                <input type="checkbox" id="electro" value="pop">
-                                <label for="electro">ELECTRO</label>
-                                </span>
-                                <span class="checkbox-line">
-                                <input type="checkbox" id="house" value="house">
-                                <label for="house">HOUSE</label>
+                                    <input type="checkbox" id="rock" value="rock">
+                                    <label for="rock">ROCK</label>
                                 </span>
                             </div>
-                                                       
-                            
-                            <input type="submit" value="Ajouter" />
-                        </form>
-                    </div>
-                    <div id="error"></div>
+                            <div class="group">
+                                <span class="checkbox-line">
+                                    <input type="checkbox" id="punk" value="punk">
+                                    <label for="punk">PUNK</label>
+                                </span>
+                                <span class="checkbox-line">
+                                    <input type="checkbox" id="electro" value="pop">
+                                    <label for="electro">ELECTRO</label>
+                                </span>
+                                <span class="checkbox-line">
+                                    <input type="checkbox" id="house" value="house">
+                                    <label for="house">HOUSE</label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="error"></div>
+                    </form>
+                </div>
+
+
+                <!-- gestion globale -->
+                <div id="ajouterGroup">
+                    <h2>Ajouter un festival</h2>
+                    <form id="formAjouter">
+                        <div class="form-group">
+                            <input type="text" id="nom" placeholder="Nom du festival" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="dateDebut" placeholder="Date de début" />
+                            <input type="text" id="dateFin" placeholder="Date de fin" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="urlLogo" placeholder="Lien du logo du festival" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="position" placeholder="Géolocalisation du festival" disabled/>
+                        </div>
+                        <div class="form-group checkboxes">
+                            <div class="group">
+                                <span class="checkbox-line">
+                                    <input type="checkbox" id="variete" value="variete">
+                                    <label for="variete">VARIETE</label>
+                                </span>
+                                <span class="checkbox-line">
+                                    <input type="checkbox" id="pop" value="pop">
+                                    <label for="pop">POP</label>
+                                </span>
+                                <span class="checkbox-line">
+                                    <input type="checkbox" id="rock" value="rock">
+                                    <label for="rock">ROCK</label>
+                                </span>
+                            </div>
+                            <div class="group">
+                                <span class="checkbox-line">
+                                    <input type="checkbox" id="punk" value="punk">
+                                    <label for="punk">PUNK</label>
+                                </span>
+                                <span class="checkbox-line">
+                                    <input type="checkbox" id="electro" value="pop">
+                                    <label for="electro">ELECTRO</label>
+                                </span>
+                                <span class="checkbox-line">
+                                    <input type="checkbox" id="house" value="house">
+                                    <label for="house">HOUSE</label>
+                                </span>
+                            </div>
+                        </div>
+                                                    
+                        
+                        <input type="submit" value="Ajouter" />
+                    </form>
+                    <div class="error"></div>
                 </div>
             </div>
             
@@ -110,7 +141,7 @@
 
 
 
-
+    <script src="assets/js/content.js"></script>
     <script src="assets/js/App.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFeyRYHmKQngMTP4FJX1Ve-6zUpOtAniU&callback=app.initMap"
