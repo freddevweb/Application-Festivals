@@ -19,8 +19,10 @@ class App {
         
         // form filter
         this.$nomSearch = $( "#nomSearch" );
+        this.$searchElts = $( ".search" );
         this.$dateDebutSearch = $( "#dateDebutSearch" );
         this.$dateFinSearch = $( "#dateFinSearch" );
+
         this.$variete = $( "#variete" );
         this.$pop = $( "#pop" );
         this.$rock = $( "#rock" );
@@ -45,6 +47,22 @@ class App {
             LatLng : {lat: 46.52863469527167, lng: 2.43896484375},
             zoom : 6
         }
+        // search
+        this.selection = {
+            "name" : "",
+            "dates" : {
+                "debut" :"",
+                "fin" : ""
+            },
+            "types" : {
+                "variete" : false,
+                "rock" : false,
+                "pop" :false,
+                "punk" : false,
+                "electro" : false,
+                "house" : false
+            }
+        };
         // global
         this.errors = [];
 
@@ -58,7 +76,7 @@ class App {
 
     // ########################### datepicker
     initDatepicker( startDate ){
-        console.log("datepicker");
+
         var options = {
             dayNames: [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ],
             dayNamesMin: [ "Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa" ],
@@ -185,7 +203,7 @@ class App {
                 debut : festival.debut,
                 fin : festival.fin
             };
-            console.log(arrayFestivals);
+
             arrayFestivals.push(objectFestivals);
         }
         var festivalsString = JSON.stringify(arrayFestivals);
@@ -223,11 +241,39 @@ class App {
     }
 
     addOptions( titre ){
-        var option = "<option value=" + titre.replace(/\s/g,'') + ">" + titre + "</option>";
+        var option = "<option value=" + titre.replace(/\s/g,'_') + ">" + titre + "</option>";
         this.$nomSearch.append(option);
 
     }
+    
 
+    filterElts(){
+
+        for(var festival of this.festivals){
+
+            festival.setVisible(false);
+
+            if( festival.title.replace(/\s/g,'_') == this.selection.name ) {
+
+                festival.setVisible(true);
+            }
+
+            if( festival.debut <= this.selection.dates.debut && festival.fin >= this.selection.dates.fin ) {
+
+                festival.setVisible(true);
+            }
+            
+            for( var typ of festival.type ){
+
+                if( this.selection.types[typ] == true ){
+
+                    festival.setVisible(true);
+                }
+            }
+        }
+    }
+
+    
 
 
 

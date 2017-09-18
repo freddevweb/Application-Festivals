@@ -97,7 +97,7 @@ input[type=text], #nomSearch {
     color: lightcoral;
 }
  
-.checkboxes {
+.checkboxes, .minigroup {
     display: flex;
     justify-content: left;
     background-color: rgba(0, 0, 0, 0.5);

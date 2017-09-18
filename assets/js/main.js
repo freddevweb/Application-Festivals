@@ -95,6 +95,7 @@ app.main = function(){
             );
         }
         else {
+
             app.showError();
         }
         
@@ -103,7 +104,45 @@ app.main = function(){
 
 
     // ########################### form chercher festival
-    
+
+
+    app.$searchElts.change(function(){
+
+        if( app.$nomSearch.val() != "Choisissez un festival" ){
+
+            app.selection.name = app.$nomSearch.val();
+        }
+        else {
+            app.selection.name = "";
+        }
+
+        if( app.$nomSearch.val() != "" ){
+
+            if( app.$dateDebutSearch.datepicker( "getDate" ) != "" && app.$dateFinSearch.datepicker( "getDate" ) != "" ){
+                app.selection.dates.debut = app.$dateDebutSearch.datepicker( "getDate" );
+                app.selection.dates.fin = app.$dateFinSearch.datepicker( "getDate" );
+            }
+            else {
+                app.selection.dates.debut = "";
+                app.selection.dates.fin = "";
+            }
+        };
+
+        if( $( this ).attr("class") == "search check" ){
+            
+            if( $( this ).is(":checked") ){
+                
+                app.selection.types[$( this ).attr("id")] = true;
+                
+            }
+            else {
+
+                app.selection.types[$( this ).attr("id")] = false;
+            }
+        }
+
+        app.filterElts();
+    });
 
 
 
@@ -125,10 +164,6 @@ app.main = function(){
 
 
 
-
-    // window.onbeforeunload = function(){
-    //     app.saveFestivals();
-    // }
 
 
 

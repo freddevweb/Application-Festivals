@@ -35,44 +35,52 @@
                     <h2>Chercher un festival</h2>
                     <form id="chercherFestival">
                         <div class="form-group">
-                            <select id="nomSearch">
+                            <select id="nomSearch"  class="search nomSearch">
                                 <option>Choisissez un festival</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <input type="text" id="dateDebutSearch" placeholder="Date de début" />
-                            <input type="text" id="dateFinSearch" placeholder="Date de fin" />
+                            <input type="text" id="dateFinSearch" class="search dateFinSearch" placeholder="Date de fin" />
                         </div>
                         <div class="form-group checkboxes">
                             <div class="group">
                                 <span class="checkbox-line">
-                                    <input type="checkbox" id="variete" value="variete">
+                                    <input type="checkbox" id="variete" class="search check" value="variete">
                                     <label for="variete">VARIETE</label>
                                 </span>
                                 <span class="checkbox-line">
-                                    <input type="checkbox" id="pop" value="pop">
+                                    <input type="checkbox" id="pop" class="search check" value="pop">
                                     <label for="pop">POP</label>
                                 </span>
                                 <span class="checkbox-line">
-                                    <input type="checkbox" id="rock" value="rock">
+                                    <input type="checkbox" id="rock" class="search check" value="rock">
                                     <label for="rock">ROCK</label>
                                 </span>
                             </div>
                             <div class="group">
                                 <span class="checkbox-line">
-                                    <input type="checkbox" id="punk" value="punk">
+                                    <input type="checkbox" id="punk" class="search check" value="punk">
                                     <label for="punk">PUNK</label>
                                 </span>
                                 <span class="checkbox-line">
-                                    <input type="checkbox" id="electro" value="pop">
+                                    <input type="checkbox" id="electro" class="search check" value="pop">
                                     <label for="electro">ELECTRO</label>
                                 </span>
                                 <span class="checkbox-line">
-                                    <input type="checkbox" id="house" value="house">
+                                    <input type="checkbox" id="house" class="search check" value="house">
                                     <label for="house">HOUSE</label>
                                 </span>
                             </div>
                         </div>
+                        <!-- 
+                        <div class="form-group minigroup ">
+                            <span class="checkbox-line">
+                                    <input type="checkbox" id="localisation" class="search" value="localisation">
+                                    <label for="localisation">PROCHE DE MOI</label>
+                            </span>
+                        </div>
+                         -->
                         <div class="error"></div>
                     </form>
                 </div>
