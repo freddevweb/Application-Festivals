@@ -1,5 +1,5 @@
 var app = new App();
-localStorage.clear("festivals");
+// localStorage.clear("festivals");
 
 // ########################### menu
 app.$chercher.click(function(){
@@ -7,17 +7,20 @@ app.$chercher.click(function(){
     if( app.$ajouterGroup.css("display") == "block" ){
 
         app.$ajouterGroup.css("display", "none");
+        
     }
 
-    app.$chercherGroup.css("display", "block");
+    app.$chercherGroup.css( "display", "block" );
+    app.$mesParticipations.css( "display", "block" );
 });
 
 app.$ajouter.click(function(){
-    if( app.$chercherGroup.css("display") == "block" ){
+    if( app.$chercherGroup.css( "display" ) == "block" ){
 
-        app.$chercherGroup.css("display", "none");
+        app.$chercherGroup.css( "display", "none" );    
     }
 
+    app.$mesParticipations.css( "display", "none" );
     app.$ajouterGroup.css("display", "block");
 });
 // ########################### datepicker
@@ -34,7 +37,11 @@ app.$dateDebut.change(function(){ // ne fonctionne pas !
 
 app.main = function(){
 
+    // when maps is ready execute this
+    app.readParticipation();
     app.readFestivals();
+    app.addToLegend();
+
 
     // ########################### form ajouter festival
 
@@ -46,6 +53,7 @@ app.main = function(){
         app.$position.val( event.latLng.lat() + " / " + event.latLng.lng() );
     });
     
+    // form add new festival
     app.$addForm.submit(function(event){
 
         event.preventDefault();
@@ -93,6 +101,8 @@ app.main = function(){
                 app.$dateDebut.datepicker('getDate'), 
                 app.$dateFin.datepicker('getDate')
             );
+
+            addToLegend();
         }
         else {
 
@@ -103,9 +113,7 @@ app.main = function(){
 
 
 
-    // ########################### form chercher festival
-
-
+    // ########################### form search festival
     app.$searchElts.change(function(){
 
         if( app.$nomSearch.val() != "Choisissez un festival" ){
@@ -145,27 +153,44 @@ app.main = function(){
     });
 
 
+    // ########################### click participation
+    $(document).on("click", ".participation", function(){
+        
+        if( $( this ).attr( "class" ).indexOf( "green" ) != -1){
+
+            $( this ).removeClass( "green" );
+            $( this ).addClass( "red" );
+            $( this ).text( "Ne plus participer" );
+            var id = $( this ).attr( "id" ).replace("_btn", "");
+            var title = id.replace(/_/g,' ')
+            app.addParticipation( title );
+            console.log( title );
 
 
+            return;
+        }
 
 
+        if( $( this ).attr( "class" ).indexOf( "red" ) != -1){
 
+            $( this ).removeClass( "red" );
+            $( this ).addClass( "green" );
+            $( this ).text( "Je participe" );
 
+            app.removeParticipation( $( this ).attr( "id" ) );
 
+            return;
+        }
+    });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // ########################### click on localiser
+    $(document).on("click", ".localiser", function(){
+        
+        var id = $(this).parent().parent().attr("id");
+        var name = id.replace("participation_",'');
+        var title = name.replace(/_/g,' ');
+        app.mapCenter( title );
+    });
 
 
 }
@@ -174,6 +199,7 @@ app.main = function(){
 
 window.onbeforeunload = function(){
     app.saveFestivals();
+    app.saveParticipation();
 }
 
 

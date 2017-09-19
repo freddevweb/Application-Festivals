@@ -1,5 +1,4 @@
 
-
 contentsFestivals = [
 
     {
@@ -49,6 +48,8 @@ contentsFestivals = [
         "fin":"2017-12-16T22:00:00.000Z"
     }
 ];
+
+contentParticipation = ["Love techno", "Love techno", "Les vieilles charrues", "Les vieilles charrues", "Love techno"];
 
 
 

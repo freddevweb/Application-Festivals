@@ -19,6 +19,9 @@
     <div id="main">
 
         <section id="map"></section>
+        <div id="legend">
+            <h2><strong>NEXT</strong></h2>
+        </div>
 
         <section id="forms">
 
@@ -83,8 +86,12 @@
                          -->
                         <div class="error"></div>
                     </form>
+                    
                 </div>
-
+                <div id="mesParticipations">
+                    <h2>Mes festivals :</h2>
+                    <div id="participation"></div>
+                </div>
 
                 <!-- gestion globale -->
                 <div id="ajouterGroup">
@@ -146,13 +153,13 @@
     
 
 
-
-
-
+    <script src="assets/js/markercluster.js"></script>
     <script src="assets/js/content.js"></script>
     <script src="assets/js/App.js"></script>
     <script src="assets/js/main.js"></script>
+    
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFeyRYHmKQngMTP4FJX1Ve-6zUpOtAniU&callback=app.initMap"
     async defer></script>
+    
 </body>
 </html>
