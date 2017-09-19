@@ -192,6 +192,12 @@ app.main = function(){
         app.mapCenter( title );
     });
 
+    $(document).on("click", ".ico", function(){
+        var id = $(this).attr("id");
+        var name = id.replace("_ico",'');
+        var title = name.replace(/_/g,' ');
+        app.mapCenter( title );
+    });
 
 }
 

@@ -430,7 +430,7 @@ class App {
 
             if( this.now < Date.parse( festival.fin ) ){
                 
-                var div = '<div id="' + festival.title.replace( /\s/g,'' ) + '_ico">';
+                var div = '<div id="' + festival.title.replace( /\s/g,'_' ) + '_ico" class="ico">';
                 div += '<img src="' + festival.icon.url + '" title="' + festival.title + '" alt="' + festival.title + '" />';
                 
                 if( this.now < Date.parse( festival.fin ) && this.now >= Date.parse( festival.debut ) ){
@@ -447,7 +447,7 @@ class App {
                 }
                 
                 div += '</div>';
-                console.log($(div));
+
                 this.$legend.append( div );
             }
         }
